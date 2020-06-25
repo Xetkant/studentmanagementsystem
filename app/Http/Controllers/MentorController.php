@@ -12,7 +12,7 @@ class MentorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function mentorindex()
     {
         $mentors = Mentor::all();
         return view('mentor',['mentors'=>$mentors,'layout'=>'index']);
@@ -23,7 +23,7 @@ class MentorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function mentorcreate()
     {
         $mentors = Mentor::all();
         return view('mentor',['mentors'=>$mentors,'layout'=>'create']);
@@ -35,7 +35,7 @@ class MentorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function mentorstore(Request $request)
     {
         $mentor = new Mentor();
         $mentor->cne = $request->input('cne');
@@ -53,7 +53,7 @@ class MentorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function mentorshow($id)
     {
         $mentor = Mentor::find($id);
         $mentors = Mentor::all();
@@ -66,7 +66,7 @@ class MentorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function mentoredit($id)
     {
         $mentor = Mentor::find($id);
         $mentors = Mentor::all();
@@ -80,7 +80,7 @@ class MentorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function mentorupdate(Request $request, $id)
     {
         $mentor = Mentor::find($id);
         $mentor->cne = $request->input('cne');
@@ -98,7 +98,7 @@ class MentorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function mentordelete($id)
     {
       $mentor = Mentor::find($id);
       $mentor->delete() ;
