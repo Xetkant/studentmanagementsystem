@@ -28,13 +28,6 @@ Route::post('/store',"StudentController@store") ;
 Route::post('/update/{id}',"StudentController@update") ;
 
 
-Route::get('/mentoredit/{id}',"MentorController@mentoredit") ;
-Route::get('/mentordelete/{id}',"MentorController@mentordelete") ;
-Route::get('/mentorshow/{id}',"MentorController@mentorshow") ;
-Route::get('/mentorcreate',"MentorController@mentorcreate") ;
-Route::post('/mentorstore',"MentorController@mentorstore") ;
-Route::post('/mentorupdate/{id}',"MentorController@mentorupdate") ;
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
