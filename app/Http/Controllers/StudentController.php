@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use Illuminate\Http\Request;
+use App\Repositories\StudentRepository;
 
 class StudentController extends Controller
 {
+
+    function __construct(StudentRepository $sturepo)
+    {
+
+        $this->sturepo = $sturepo;
+        // $this->todorepo = $todorepo;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        //$students = Student::all();
+        $students = $this->sturepo->studentAll();
         return view('student',['students'=>$students,'layout'=>'index']);
     }
 
@@ -25,8 +35,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $students = Student::all();
-        return view('student',['students'=>$students,'layout'=>'create']);
+         $students = Student::all();
+         return view('student',['students'=>$students,'layout'=>'create']);
     }
 
     /**
@@ -68,9 +78,9 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::find($id);
-        $students = Student::all();
-        return view('student',['students'=>$students,'student'=>$student, 'layout'=>'edit']);
+        // $student = Student::find($id);
+        // $students = Student::all();
+        // return view('student',['students'=>$students,'student'=>$student, 'layout'=>'edit']);
     }
 
     /**
@@ -83,14 +93,16 @@ class StudentController extends Controller
     
     public function update(Request $request, $id)
     {
-      $student = Student::find($id);
-      $student->cne = $request->input('cne') ;
-      $student->firstName = $request->input('firstName') ;
-      $student->secondName = $request->input('secondName') ;
-      $student->age = $request->input('age') ;
-      $student->speciality = $request->input('speciality') ;
-      $student->save() ;
-      return redirect('/') ;
+      // $student = Student::find($id);
+      // $student->cne = $request->input('cne') ;
+      // $student->firstName = $request->input('firstName') ;
+      // $student->secondName = $request->input('secondName') ;
+      // $student->age = $request->input('age') ;
+      // $student->speciality = $request->input('speciality') ;
+      // $student->save() ;
+       //return redirect('/') ;
+       $response = $this->sturepo->taskassign($request->id);
+       return view('student',['students'=>$students,'student'=>$student, 'layout'=>'edit']);
     }
 
     /**
@@ -99,10 +111,12 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
-      $student = Student::find($id);
-      $student->delete() ;
-      return redirect('/') ;
+       $this->sturepo->delete($request->id);
+      //return redirect()->back()->with('status','Delete Success!');
+      // $student = Student::find($id);
+       $student->delete() ;
+       return redirect('/') ;
     }
 }
